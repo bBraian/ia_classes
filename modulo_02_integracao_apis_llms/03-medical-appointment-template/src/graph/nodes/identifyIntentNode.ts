@@ -1,3 +1,5 @@
+import { getSystemPrompt, getUserPromptTemplate } from '../../prompts/v1/identifyIntent.ts';
+import { professionals } from '../../services/appointmentService.ts';
 import type { GraphState } from '../graph.ts';
 
 export function createIdentifyIntentNode() {
@@ -6,6 +8,9 @@ export function createIdentifyIntentNode() {
    const input = state.messages.at(-1)!.text;
 
     try {
+
+      const systemPrompt = getSystemPrompt(professionals);
+      const userPrompt = getUserPromptTemplate(input);
 
       return {
         ...state,
